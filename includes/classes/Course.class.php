@@ -23,11 +23,11 @@ class Course {
 
     /* ADD COURSE TO DATABASE */
     public function addCourse($code, $courseName, $progression, $syllabus, $term) : bool {
-        $this -> code = $code;
-        $this -> courseName = $courseName;
-        $this -> progression = $progression;
-        $this -> syllabus = $syllabus;
-        $this -> term = $term;
+        $this -> code = strip_tags($code);
+        $this -> courseName = strip_tags($courseName);
+        $this -> progression = strip_tags($progression);
+        $this -> syllabus = strip_tags($syllabus);
+        $this -> term = strip_tags($term);
 
         $stmt = $this -> db -> prepare("INSERT INTO course (code, courseName, progression, syllabus, term)
         VALUES (?, ?, ?, ?, ?)");
@@ -71,11 +71,11 @@ class Course {
 
     public function updateCourse($code, $courseName, $progression, $syllabus, $term) : bool {
         
-        $this -> code = $code;
-        $this -> courseName = $courseName;
-        $this -> progression = $progression;
-        $this -> syllabus = $syllabus;
-        $this -> term = $term;
+        $this -> code = strip_tags($code);
+        $this -> courseName = strip_tags($courseName);
+        $this -> progression = strip_tags($progression);
+        $this -> syllabus = strip_tags($syllabus);
+        $this -> term = strip_tags($term);
 
         $stmt = $this -> db -> prepare("UPDATE course SET courseName=?, progression=?, syllabus=?, term=? WHERE code=?;");
         $stmt -> bind_param("sssss", $this -> courseName, $this -> progression, $this -> syllabus, $this -> term, $this-> code);
