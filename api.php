@@ -48,13 +48,13 @@ switch($method) {
     case 'POST':
         //Läser in JSON-data skickad med anropet och omvandlar till ett objekt.
         $data = json_decode(file_get_contents("php://input"));
-
+        
+            //checks if any value is empty
         if($data->code == "" || $data->courseName == "" || $data->progression == "" || $data->syllabus == "" || $data->term =="") {
             $response = array("message" => "Please send code, name, progression, syllabus and term");
 
             http_response_code(400);//error
         } else {
-            //checks if any value is empty
             if($Course->addCourse($data->code, $data->courseName, $data->progression, $data->syllabus, $data->term)) {
                 $response = array("message" => "Created");
                 http_response_code(201); //Created
